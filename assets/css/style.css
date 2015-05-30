@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body {
+	background-color: lightgray;
+}
+
+.table, th{
+	text-align: center;
+	background-color: white;
+}
+
+
+th{
+	background-color:lightblue;
+}
+
+.table>tbody>tr>td{
+	vertical-align: middle;
+}
+
+.edit, .delete {
+	width: 50%;
+}
+
+.save {
+	width: 100%;
+}
+
+td {
+	width: 33%;
+}
+
+#addNew {
+	display: block;
+	margin: auto;
+	width: 33%;
+}
+
+input {
+	text-align: center;
+}
