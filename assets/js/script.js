@@ -61,28 +61,22 @@ $(document).ready(function() {
 	
 	users.on("click", ".edit", function() {
 		var row = $(this).closest("tr");
+		var oldIme = row.find('td:nth-child(1)').text();
+		var oldPrezime = row.find('td:nth-child(2)').text();
 		
-		var ime = row.find('td:nth-child(1)').text();
-		row.find('td:nth-child(1)').html("<input type='text' name='name' value=" + ime + ">");
-		
-		var input = row.find('td:nth-child(1) input');
-		tmp = input.val(); 
-		input.focus().val("").blur().focus().val(tmp);
-		
-		var prezime = row.find('td:nth-child(2)').text();
-		row.find('td:nth-child(2)').html("<input type='text' name='surname' value=" + prezime + ">");
-		
-		row.find('td:nth-child(3)').html("<button class='btn btn-success save'>Submit</button>");
+		row.html("<td><input type='text' name='name'></td><td><input type='text' name='surname'></td><td><button class='btn btn-success save'>Submit</button></td>");
+		row.find('td:nth-child(1) input').focus().val(oldIme);
+		row.find('td:nth-child(2) input').val(oldPrezime);
 		
 	});
 	
 	users.on("click", ".save", function() {
 		var row = $(this).closest("tr");
-		var novoIme = row.find('td:nth-child(1) input').val();
-		var novoPrezime = row.find('td:nth-child(2) input').val();
+		var newIme = row.find('td:nth-child(1) input').val();
+		var newPrezime = row.find('td:nth-child(2) input').val();
 		
-		$.post(API + "update/" + row.data("id") + "/?name=" + novoIme + "&surname=" + novoPrezime, {}, function(usr) {
-			row.html("<td>"+ usr.name + "</td><td>" + usr.surname + "</td><td><button class='btn btn-warning edit'>Edit</button><button class='btn btn-danger delete'>Delete</button></td>");
+		$.post(API + "update/" + row.data("id") + "/?name=" + newIme + "&surname=" + newPrezime, {}, function(usr) {
+			row.html("<td>" + usr.name + "</td><td>" + usr.surname + "</td><td><button class='btn btn-warning edit'>Edit</button><button class='btn btn-danger delete'>Delete</button></td>");
 		});
 		
 	});
